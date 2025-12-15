@@ -1,9 +1,11 @@
 # 🤖 AI-Native Textbook: Physical AI & Humanoid Robotics
 
-[![CI](https://github.com/Syeda-Rohab/ai-native-textbook/actions/workflows/ci.yml/badge.svg)](https://github.com/Syeda-Rohab/ai-native-textbook/actions/workflows/ci.yml)
-[![Deploy](https://github.com/Syeda-Rohab/ai-native-textbook/actions/workflows/deploy.yml/badge.svg)](https://github.com/Syeda-Rohab/ai-native-textbook/actions/workflows/deploy.yml)
+[![Deploy](https://img.shields.io/badge/Deployed%20on-Vercel-00C7B7?logo=vercel)](https://h1-book-q4.vercel.app)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 An AI-powered textbook generation system that creates high-quality educational content on Physical AI and Humanoid Robotics. Built with Claude AI, Docusaurus, and following strict constitution-based quality standards.
+
+**🌐 Live Site:** [https://h1-book-q4.vercel.app](https://h1-book-q4.vercel.app)
 
 ## 🌟 Features
 
@@ -21,10 +23,11 @@ An AI-powered textbook generation system that creates high-quality educational c
 - ✅ **Token Usage Tracking** - Cost monitoring and budgets
 
 ### Performance & Accessibility
-- ✅ **Mobile-First Design** - Docusaurus responsive framework
+- ✅ **Modern Homepage UI** - Gradient hero section, feature cards, chapter overview
+- ✅ **Mobile-First Design** - Fully responsive Docusaurus framework
 - ✅ **Fast Loading** - < 2s on 3G, optimized for low-end devices
 - ✅ **WCAG 2.1 AA Ready** - Accessibility testing guides
-- ✅ **Production-Optimized** - Built and tested
+- ✅ **Production-Optimized** - Built and tested, deployed on Vercel
 
 ### Developer Experience
 - ✅ **Error Handling** - Comprehensive retry logic with exponential backoff
@@ -54,8 +57,8 @@ An AI-powered textbook generation system that creates high-quality educational c
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Syeda-Rohab/ai-native-textbook.git
-cd ai-native-textbook
+git clone https://github.com/Syeda-Rohab/H1-Book-Q4.git
+cd H1-Book-Q4
 ```
 
 ### 2. Set Up Environment
@@ -138,12 +141,17 @@ ai-native-textbook/
 │   └── validate_project.py      # Comprehensive project validation
 ├── website/                # Docusaurus frontend
 │   ├── docs/              # Generated markdown chapters
-│   ├── src/               # React components
+│   ├── src/
+│   │   ├── pages/         # Custom pages
+│   │   │   ├── index.tsx  # Modern homepage with gradient UI
+│   │   │   └── index.module.css # Homepage styling
+│   │   └── css/           # Global styles
 │   ├── static/            # Static assets
 │   │   └── img/           # Logo, favicon, social card
-│   ├── docusaurus.config.js
-│   ├── sidebars.js
-│   └── package.json
+│   ├── docusaurus.config.js # Docusaurus configuration
+│   ├── sidebars.js        # Sidebar navigation
+│   └── package.json       # Dependencies
+├── vercel.json             # Vercel deployment config
 ├── history/
 │   ├── prompts/           # Prompt History Records (PHRs)
 │   └── adr/               # Architecture Decision Records
@@ -194,13 +202,20 @@ npm run format    # Auto-format code
 
 ## 🚢 Deployment
 
-### GitHub Pages (Automated)
+### Vercel (Production - Automated)
 
-1. Push to `main` branch
-2. GitHub Actions automatically builds and deploys
-3. Visit: `https://syeda-rohab.github.io/ai-native-textbook/`
+The site is deployed on Vercel with automatic deployments from the `main` branch.
 
-### Manual Deployment
+**Live URL:** [https://h1-book-q4.vercel.app](https://h1-book-q4.vercel.app)
+
+**Deployment Configuration:**
+- Build command: `cd website && npm run build`
+- Output directory: `website/build`
+- Auto-deploys on every push to `main`
+
+See [`vercel.json`](vercel.json) for full configuration.
+
+### Alternative: GitHub Pages
 
 ```bash
 cd website
@@ -209,8 +224,8 @@ GIT_USER=<Your GitHub username> npm run deploy
 
 ### Custom Domain
 
-1. Add `CNAME` file to `website/static/`
-2. Update `url` in `docusaurus.config.js`
+1. Configure custom domain in Vercel dashboard
+2. Update `url` in `website/docusaurus.config.js`
 3. Configure DNS settings with your domain provider
 
 ## 📊 Constitution Compliance
@@ -298,29 +313,39 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-**Syeda Rohab**
+**Syeda Rohab Ali**
 - GitHub: [@Syeda-Rohab](https://github.com/Syeda-Rohab)
-- Project: [AI-Native Textbook](https://github.com/Syeda-Rohab/ai-native-textbook)
+- Project Repository: [H1-Book-Q4](https://github.com/Syeda-Rohab/H1-Book-Q4)
+- Live Site: [h1-book-q4.vercel.app](https://h1-book-q4.vercel.app)
 
 ## 🗺️ Roadmap
 
 ### Phase 1: MVP ✅
-- [x] 6 core chapters
-- [x] Word count validation
-- [x] Docusaurus setup
-- [x] GitHub Pages deployment
+- [x] 6 core chapters with AI-generated content
+- [x] Word count validation (800-1200 words)
+- [x] Docusaurus setup with responsive design
+- [x] Vercel deployment with auto-deploy
 
-### Phase 2: Interactive Features 🚧
-- [ ] Chapter summaries
-- [ ] Self-assessment quizzes
-- [ ] Learning boosters (analogies, examples)
+### Phase 2: Interactive Features ✅
+- [x] Chapter summaries (3-5 key takeaways)
+- [x] Self-assessment quizzes (5-7 MCQs per chapter)
+- [x] Learning boosters (analogies, examples, explanations)
 
-### Phase 3: AI Features 🔮
+### Phase 3: Modern UI & Polish ✅
+- [x] Modern homepage with gradient hero section
+- [x] Feature cards and chapter overview
+- [x] Error handling with exponential backoff + jitter
+- [x] Token usage tracking and cost monitoring
+- [x] Constitution compliance validation
+- [x] Mobile performance & accessibility testing guides
+
+### Phase 4: AI Features 🔮
 - [ ] RAG chatbot for Q&A
 - [ ] Content personalization
 - [ ] One-click Urdu translation
+- [ ] Database integration for multi-user support
 
-### Phase 4: Extended Content 🔮
+### Phase 5: Extended Content 🔮
 - [ ] Safety and Ethics chapter
 - [ ] Future Trends chapter
 - [ ] Video demonstrations
@@ -330,5 +355,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with ❤️ using AI and Spec-Driven Development**
 
-*Last Updated: 2025-12-15*
+*Last Updated: 2025-12-16*
 *Constitution Version: 1.0.0*
