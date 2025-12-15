@@ -41,8 +41,8 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          // Docs route (using /docs for Vercel compatibility)
-          routeBasePath: '/',
+          // Docs route at /docs (homepage at /)
+          routeBasePath: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           // Remove edit links (no external repo for MVP)
           editUrl: undefined,
@@ -116,7 +116,7 @@ const config = {
             label: 'Chapters',
           },
           {
-            href: 'https://github.com/Syeda-Rohab/ai-native-textbook',
+            href: 'https://github.com/Syeda-Rohab/H1-Book-Q4',
             label: 'GitHub',
             position: 'right',
           },
@@ -135,11 +135,11 @@ const config = {
               },
               {
                 label: 'Introduction',
-                to: '/intro',
+                to: '/docs/intro',
               },
               {
                 label: 'Chapter 1',
-                to: '/chapter-01-physical-ai-intro',
+                to: '/docs/chapter-01-physical-ai-intro',
               },
             ],
           },
@@ -148,11 +148,11 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/Syeda-Rohab/ai-native-textbook',
+                href: 'https://github.com/Syeda-Rohab/H1-Book-Q4',
               },
               {
                 label: 'Report Issues',
-                href: 'https://github.com/Syeda-Rohab/ai-native-textbook/issues',
+                href: 'https://github.com/Syeda-Rohab/H1-Book-Q4/issues',
               },
             ],
           },

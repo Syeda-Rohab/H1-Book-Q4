@@ -4,7 +4,7 @@ sidebar_label: Introduction
 title: Welcome to the Textbook
 description: AI-Native Textbook on Physical AI & Humanoid Robotics
 keywords: ["physical ai", "robotics", "humanoid robots", "ai-native textbook", "education"]
-slug: /intro
+slug: intro
 ---
 
 # AI-Native Textbook: Physical AI & Humanoid Robotics
