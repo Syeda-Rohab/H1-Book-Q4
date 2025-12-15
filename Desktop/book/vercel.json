@@ -1,0 +1,9 @@
+{
+  "buildCommand": "cd website && npm install && npm run build",
+  "outputDirectory": "website/build",
+  "installCommand": "npm install --prefix website",
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

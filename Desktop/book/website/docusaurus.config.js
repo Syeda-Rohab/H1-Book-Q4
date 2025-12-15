@@ -11,13 +11,11 @@ const config = {
   tagline: 'An AI-Native Interactive Textbook',
   favicon: 'img/favicon.ico',
 
-  // Production URL (update with your GitHub Pages URL or custom domain)
-  url: process.env.NODE_ENV === 'production'
-    ? 'https://syeda-rohab.github.io'
+  // Production URL (Vercel deployment)
+  url: process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
     : 'http://localhost:3000',
-  baseUrl: process.env.NODE_ENV === 'production'
-    ? '/ai-native-textbook/'
-    : '/',
+  baseUrl: '/',
 
   // GitHub pages deployment config
   organizationName: 'Syeda-Rohab',
