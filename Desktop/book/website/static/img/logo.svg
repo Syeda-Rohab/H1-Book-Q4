@@ -1,0 +1,36 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Modern AI Robot Icon -->
+  <defs>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e8555;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#25c2a0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Robot Head -->
+  <rect x="60" y="50" width="80" height="70" rx="10" fill="url(#primaryGradient)"/>
+
+  <!-- Eyes -->
+  <circle cx="80" cy="80" r="8" fill="#ffffff"/>
+  <circle cx="120" cy="80" r="8" fill="#ffffff"/>
+  <circle cx="82" cy="82" r="4" fill="#1a1a1a"/>
+  <circle cx="122" cy="82" r="4" fill="#1a1a1a"/>
+
+  <!-- Antenna -->
+  <line x1="100" y1="50" x2="100" y2="30" stroke="#2e8555" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="100" cy="25" r="6" fill="#25c2a0"/>
+
+  <!-- Smile -->
+  <path d="M 80 100 Q 100 110 120 100" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Body -->
+  <rect x="70" y="120" width="60" height="50" rx="8" fill="#2e8555"/>
+
+  <!-- Arms -->
+  <rect x="40" y="130" width="30" height="8" rx="4" fill="#25c2a0"/>
+  <rect x="130" y="130" width="30" height="8" rx="4" fill="#25c2a0"/>
+
+  <!-- Legs -->
+  <rect x="75" y="170" width="20" height="25" rx="4" fill="#2e8555"/>
+  <rect x="105" y="170" width="20" height="25" rx="4" fill="#2e8555"/>
+</svg>

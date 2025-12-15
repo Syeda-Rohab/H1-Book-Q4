@@ -1,0 +1,138 @@
+/* ChapterQuiz Component Styles */
+
+.quizContainer {
+  border: 2px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  background: var(--ifm-background-surface-color);
+}
+
+.quizTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.question {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 6px;
+}
+
+.questionText {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.option {
+  margin: 0.5rem 0;
+}
+
+.optionButton {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background: var(--ifm-background-color);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+
+.optionButton:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-primary);
+}
+
+.optionButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.optionButton.correct {
+  background: #d4edda;
+  border-color: #28a745;
+  font-weight: bold;
+}
+
+.optionButton.incorrect {
+  background: #f8d7da;
+  border-color: #dc3545;
+}
+
+.feedback {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.feedback.correct {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.feedback.incorrect {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.score {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--ifm-color-primary-lightest);
+  border-radius: 6px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.resetButton {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.resetButton:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .quizContainer {
+    padding: 1rem;
+  }
+
+  .quizTitle {
+    font-size: 1.25rem;
+  }
+
+  .questionText {
+    font-size: 1rem;
+  }
+
+  .optionButton {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+}

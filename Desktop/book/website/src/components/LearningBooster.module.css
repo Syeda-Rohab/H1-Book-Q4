@@ -1,0 +1,13 @@
+/* LearningBooster styles */
+.booster { margin: 1.5rem 0; padding: 1rem 1.25rem; border-left: 4px solid; border-radius: 6px; background: var(--ifm-background-surface-color); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.booster.analogy { border-color: #17a2b8; background: #d1ecf1; }
+.booster.example { border-color: #ffc107; background: #fff3cd; }
+.booster.explanation { border-color: #6f42c1; background: #e7e3f5; }
+[data-theme='dark'] .booster.analogy { background: #0c3c47; }
+[data-theme='dark'] .booster.example { background: #4d3800; }
+[data-theme='dark'] .booster.explanation { background: #2d1b4e; }
+.header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; font-weight: 600; }
+.icon { font-size: 1.25rem; }
+.title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.content { font-size: 0.95rem; line-height: 1.6; }
+@media (max-width: 768px) { .booster { padding: 0.875rem 1rem; } }

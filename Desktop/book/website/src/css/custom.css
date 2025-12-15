@@ -1,0 +1,553 @@
+/**
+ * Custom CSS for AI-Native Textbook
+ * Modern, Beautiful Design with Gradients and Professional Styling
+ */
+
+/* ============================================
+   CSS Variables - Modern Color Palette
+   ============================================ */
+:root {
+  /* Primary Colors - Vibrant Teal/Green */
+  --ifm-color-primary: #00b894;
+  --ifm-color-primary-dark: #00a383;
+  --ifm-color-primary-darker: #009a7b;
+  --ifm-color-primary-darkest: #007f65;
+  --ifm-color-primary-light: #00cda5;
+  --ifm-color-primary-lighter: #00d6ad;
+  --ifm-color-primary-lightest: #00f1c5;
+
+  /* Accent Colors */
+  --ifm-color-secondary: #6c5ce7;
+  --ifm-color-success: #00b894;
+  --ifm-color-info: #0984e3;
+  --ifm-color-warning: #fdcb6e;
+  --ifm-color-danger: #d63031;
+
+  /* Background & Text */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8f9fa;
+  --ifm-heading-color: #2d3436;
+  --ifm-font-color-base: #636e72;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+  --gradient-secondary: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  --gradient-hero: linear-gradient(135deg, #00b894 0%, #00cec9 50%, #74b9ff 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --shadow-hover: 0 12px 40px rgba(0, 184, 148, 0.3);
+
+  /* Typography */
+  --ifm-font-family-base: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  --ifm-heading-font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+  --ifm-font-size-base: 17px;
+  --ifm-line-height-base: 1.8;
+  --ifm-heading-line-height: 1.3;
+
+  /* Spacing */
+  --ifm-spacing-horizontal: 1.5rem;
+  --ifm-spacing-vertical: 1.5rem;
+
+  /* Border Radius */
+  --ifm-border-radius: 12px;
+  --ifm-card-border-radius: 16px;
+
+  /* Code */
+  --ifm-code-font-size: 92%;
+  --ifm-code-background: #f1f3f5;
+  --ifm-code-border-radius: 6px;
+
+  /* Navbar */
+  --ifm-navbar-height: 70px;
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.98);
+  --ifm-navbar-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================
+   Dark Mode Theme
+   ============================================ */
+[data-theme='dark'] {
+  --ifm-color-primary: #00d6ad;
+  --ifm-color-primary-dark: #00c29d;
+  --ifm-color-primary-darker: #00b894;
+  --ifm-color-primary-darkest: #00957a;
+  --ifm-color-primary-light: #00eabd;
+  --ifm-color-primary-lighter: #00f3c5;
+  --ifm-color-primary-lightest: #1affdb;
+
+  --ifm-background-color: #1a1a2e;
+  --ifm-background-surface-color: #16213e;
+  --ifm-heading-color: #eee;
+  --ifm-font-color-base: #b2bec3;
+
+  --ifm-navbar-background-color: rgba(26, 26, 46, 0.98);
+  --ifm-code-background: #0f3460;
+
+  --gradient-hero: linear-gradient(135deg, #1a1a2e 0%, #0f3460 50%, #16213e 100%);
+  --shadow-hover: 0 12px 40px rgba(0, 214, 173, 0.4);
+}
+
+/* ============================================
+   Global Styles
+   ============================================ */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--ifm-font-family-base);
+}
+
+/* ============================================
+   Navbar Enhancements
+   ============================================ */
+.navbar {
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--ifm-navbar-shadow);
+}
+
+[data-theme='dark'] .navbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar__brand {
+  font-weight: 700;
+  font-size: 1.3rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: transform 0.2s ease;
+}
+
+.navbar__brand:hover {
+  transform: scale(1.05);
+}
+
+.navbar__item {
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navbar__link--active {
+  color: var(--ifm-color-primary) !important;
+  font-weight: 600;
+}
+
+/* ============================================
+   Hero Section / Homepage
+   ============================================ */
+.markdown > h1:first-child {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .markdown > h1:first-child {
+    font-size: 2.5rem;
+  }
+}
+
+/* Welcome Section Enhancement */
+.markdown > h1:first-child + p {
+  font-size: 1.3rem;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+/* ============================================
+   Headings with Modern Style
+   ============================================ */
+.markdown h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--ifm-heading-color);
+  border-bottom: 3px solid var(--ifm-color-primary);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.markdown h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.markdown h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  color: var(--ifm-color-secondary);
+}
+
+/* ============================================
+   Chapter Cards (for Table of Contents)
+   ============================================ */
+.markdown ol > li,
+.markdown ul > li {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+/* Style chapter links as cards */
+.markdown ol > li > strong > a,
+.markdown ol > li > a {
+  display: inline-block;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-left: 5px solid var(--ifm-color-primary);
+  border-radius: var(--ifm-card-border-radius);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--ifm-heading-color);
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
+[data-theme='dark'] .markdown ol > li > strong > a,
+[data-theme='dark'] .markdown ol > li > a {
+  background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+  border-left-color: var(--ifm-color-primary-lighter);
+}
+
+.markdown ol > li > strong > a:hover,
+.markdown ol > li > a:hover {
+  transform: translateY(-4px) translateX(4px);
+  box-shadow: var(--shadow-hover);
+  border-left-width: 8px;
+}
+
+/* ============================================
+   Chapter Summary Sections
+   ============================================ */
+.chapter-summary {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-left: 6px solid var(--ifm-color-primary);
+  border-radius: var(--ifm-card-border-radius);
+  padding: 2.5rem;
+  margin: 3rem 0;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.chapter-summary::before {
+  content: '📚';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 3rem;
+  opacity: 0.1;
+}
+
+[data-theme='dark'] .chapter-summary {
+  background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+  border-left-color: var(--ifm-color-primary-lighter);
+}
+
+.chapter-summary h2 {
+  color: var(--ifm-color-primary);
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border: none;
+  display: block;
+}
+
+.chapter-summary strong {
+  color: var(--ifm-color-primary);
+  font-size: 1.15rem;
+}
+
+.chapter-summary ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.chapter-summary li {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  color: var(--ifm-heading-color);
+  font-size: 1.05rem;
+}
+
+.chapter-summary li::marker {
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* ============================================
+   Sidebar Enhancements
+   ============================================ */
+.menu {
+  padding: 1rem;
+}
+
+.menu__link {
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.menu__link:hover {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  color: var(--ifm-color-primary);
+  transform: translateX(4px);
+}
+
+[data-theme='dark'] .menu__link:hover {
+  background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+}
+
+.menu__link--active {
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.menu__link--active:hover {
+  color: white;
+}
+
+.menu__list-item-collapsible:hover {
+  background: transparent;
+}
+
+/* ============================================
+   Content Width & Readability
+   ============================================ */
+.markdown {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.markdown > p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  margin-bottom: 1.5rem;
+  color: var(--ifm-font-color-base);
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+code {
+  background: var(--ifm-code-background);
+  border-radius: var(--ifm-code-border-radius);
+  padding: 0.2rem 0.5rem;
+  font-size: var(--ifm-code-font-size);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] code {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+pre code {
+  border: none;
+  background: transparent;
+  border-radius: 0;
+}
+
+/* ============================================
+   Buttons & Interactive Elements
+   ============================================ */
+.button {
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.button--primary {
+  background: var(--gradient-primary);
+  border: none;
+}
+
+/* ============================================
+   Footer Enhancement
+   ============================================ */
+.footer {
+  background: linear-gradient(135deg, #2d3436 0%, #1a1a2e 100%);
+  padding: 3rem 0;
+}
+
+.footer__title {
+  color: var(--ifm-color-primary-lighter);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.footer__link-item {
+  transition: all 0.2s ease;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary-lighter);
+  transform: translateX(4px);
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ifm-background-surface-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.markdown > * {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.markdown > *:nth-child(1) { animation-delay: 0.1s; }
+.markdown > *:nth-child(2) { animation-delay: 0.2s; }
+.markdown > *:nth-child(3) { animation-delay: 0.3s; }
+
+/* ============================================
+   Mobile Responsiveness
+   ============================================ */
+@media (max-width: 996px) {
+  :root {
+    --ifm-font-size-base: 16px;
+    --ifm-navbar-height: 60px;
+  }
+
+  .markdown {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .markdown h1:first-child {
+    font-size: 2.2rem;
+  }
+
+  .markdown h2 {
+    font-size: 1.6rem;
+  }
+
+  .chapter-summary {
+    padding: 1.5rem;
+  }
+
+  .markdown ol > li > strong > a,
+  .markdown ol > li > a {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  .navbar,
+  .footer,
+  .sidebar,
+  .pagination-nav {
+    display: none !important;
+  }
+
+  .markdown {
+    max-width: 100%;
+  }
+
+  .chapter-summary {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1rem;
+  background: var(--ifm-color-primary);
+  color: white;
+  text-decoration: none;
+}
+
+.skip-to-content:focus {
+  left: 0;
+  top: 0;
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .button,
+  .menu__link,
+  code {
+    border: 2px solid currentColor;
+  }
+}

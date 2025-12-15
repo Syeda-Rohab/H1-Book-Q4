@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.Python
+venv/
+env/
+.venv
+
+# Build outputs
+website/build/
+website/.docusaurus/
+.cache/
+dist/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Token usage data
+.token_usage.json
+
+# Sensitive files
+HOW_TO_ADD_CREDITS.md
+SOLUTION.md
+generate_all.sh

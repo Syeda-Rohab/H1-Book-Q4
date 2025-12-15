@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+  title: RAG Chatbot API
+  version: 1.0.0
+paths:
+  /chat:
+    post:
+      summary: Send a message to the chatbot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The user's query.
+                conversation_id:
+                  type: string
+                  description: The ID of the conversation, if it exists.
+      responses:
+        '200':
+          description: A streaming response from the chatbot.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+components:
+  schemas: {}

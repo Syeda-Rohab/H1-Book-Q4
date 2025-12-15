@@ -1,0 +1,719 @@
+openapi: 3.0.3
+info:
+  title: Textbook Content Generation API
+  description: API for generating and managing AI-powered textbook chapters with summaries, quizzes, and learning boosters
+  version: 1.0.0
+  contact:
+    name: AI-Native Textbook Team
+servers:
+  - url: http://localhost:8000/api
+    description: Local development server
+  - url: https://api-textbook.railway.app/api
+    description: Production server (Railway)
+
+tags:
+  - name: Generation
+    description: Content generation operations
+  - name: Chapters
+    description: Chapter retrieval and management
+  - name: Status
+    description: Generation job status and monitoring
+
+paths:
+  /content/generate:
+    post:
+      tags:
+        - Generation
+      summary: Start batch generation of all chapters
+      description: |
+        Initiates a new content generation job to create all textbook chapters (6-8) with AI-generated
+        summaries, quizzes, and learning boosters. This is an asynchronous operation that returns a job ID
+        for status tracking.
+      operationId: startGeneration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerationRequest'
+            examples:
+              basic:
+                summary: Generate 6 chapters (MVP)
+                value:
+                  chapters_count: 6
+                  model: "claude-3-5-sonnet-20241022"
+                  include_optional_chapters: false
+              extended:
+                summary: Generate 8 chapters (extended)
+                value:
+                  chapters_count: 8
+                  model: "claude-3-5-sonnet-20241022"
+                  include_optional_chapters: true
+      responses:
+        '202':
+          description: Generation job accepted and started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationJobResponse'
+              example:
+                job_id: "550e8400-e29b-41d4-a716-446655440000"
+                status: "pending"
+                chapters_total: 6
+                started_at: "2025-12-10T10:30:00Z"
+                message: "Content generation job started. Use /api/content/generation-status/{job_id} to track progress."
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /content/generate/{chapter_number}:
+    post:
+      tags:
+        - Generation
+      summary: Regenerate a specific chapter
+      description: |
+        Regenerates a single chapter by chapter number (1-8). This can be used to fix generation errors
+        or improve content quality for a specific chapter without regenerating all chapters.
+      operationId: regenerateChapter
+      parameters:
+        - name: chapter_number
+          in: path
+          required: true
+          description: Chapter number to regenerate (1-8)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 8
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegenerationRequest'
+            example:
+              model: "claude-3-5-sonnet-20241022"
+              regenerate_summary: true
+              regenerate_quiz: true
+              regenerate_boosters: true
+      responses:
+        '202':
+          description: Chapter regeneration accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChapterRegenerationResponse'
+              example:
+                chapter_id: "123e4567-e89b-12d3-a456-426614174000"
+                chapter_number: 3
+                status: "pending"
+                message: "Chapter 3 regeneration started."
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /content/generation-status/{job_id}:
+    get:
+      tags:
+        - Status
+      summary: Get generation job status
+      description: |
+        Retrieves the current status of a content generation job, including progress, token usage,
+        and any errors encountered.
+      operationId: getGenerationStatus
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          description: Generation job UUID
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Job status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationJobStatus'
+              examples:
+                in_progress:
+                  summary: Job in progress
+                  value:
+                    job_id: "550e8400-e29b-41d4-a716-446655440000"
+                    status: "in_progress"
+                    chapters_completed: 3
+                    chapters_total: 6
+                    token_usage: 18500
+                    started_at: "2025-12-10T10:30:00Z"
+                    completed_at: null
+                    errors: []
+                    progress_percentage: 50
+                    estimated_completion: "2025-12-10T11:15:00Z"
+                completed:
+                  summary: Job completed
+                  value:
+                    job_id: "550e8400-e29b-41d4-a716-446655440000"
+                    status: "completed"
+                    chapters_completed: 6
+                    chapters_total: 6
+                    token_usage: 42300
+                    started_at: "2025-12-10T10:30:00Z"
+                    completed_at: "2025-12-10T11:25:00Z"
+                    errors: []
+                    progress_percentage: 100
+                    estimated_completion: null
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /content/chapters:
+    get:
+      tags:
+        - Chapters
+      summary: List all chapters with metadata
+      description: |
+        Retrieves a list of all textbook chapters with their metadata, including summaries, quiz counts,
+        and learning booster counts. Supports filtering by status and sorting.
+      operationId: listChapters
+      parameters:
+        - name: status
+          in: query
+          description: Filter chapters by status
+          required: false
+          schema:
+            type: string
+            enum: [pending, generated, validated, published, failed]
+        - name: sort_by
+          in: query
+          description: Sort field (default: chapter_number)
+          required: false
+          schema:
+            type: string
+            enum: [chapter_number, created_at, word_count]
+            default: chapter_number
+        - name: order
+          in: query
+          description: Sort order (default: asc)
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+      responses:
+        '200':
+          description: Chapters retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChapterListResponse'
+              example:
+                chapters:
+                  - id: "123e4567-e89b-12d3-a456-426614174000"
+                    chapter_number: 1
+                    title: "Introduction to Physical AI"
+                    slug: "physical-ai-intro"
+                    word_count: 1050
+                    reading_time_minutes: 6
+                    status: "published"
+                    docusaurus_url: "/physical-ai-intro"
+                    has_summary: true
+                    quiz_question_count: 6
+                    learning_booster_count: 3
+                    created_at: "2025-12-10T11:00:00Z"
+                  - id: "234e5678-e89b-12d3-a456-426614174001"
+                    chapter_number: 2
+                    title: "Humanoid Robotics Fundamentals"
+                    slug: "humanoid-robotics"
+                    word_count: 1120
+                    reading_time_minutes: 7
+                    status: "published"
+                    docusaurus_url: "/humanoid-robotics"
+                    has_summary: true
+                    quiz_question_count: 7
+                    learning_booster_count: 3
+                    created_at: "2025-12-10T11:10:00Z"
+                total_count: 6
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /content/chapters/{chapter_number}:
+    get:
+      tags:
+        - Chapters
+      summary: Get full chapter details
+      description: |
+        Retrieves complete chapter data including metadata, summary takeaways, quiz questions,
+        and learning boosters. Use this endpoint for rendering chapter pages.
+      operationId: getChapterDetails
+      parameters:
+        - name: chapter_number
+          in: path
+          required: true
+          description: Chapter number (1-8)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 8
+      responses:
+        '200':
+          description: Chapter details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChapterDetails'
+              example:
+                id: "123e4567-e89b-12d3-a456-426614174000"
+                chapter_number: 1
+                title: "Introduction to Physical AI"
+                slug: "physical-ai-intro"
+                word_count: 1050
+                reading_time_minutes: 6
+                status: "published"
+                docusaurus_url: "/physical-ai-intro"
+                markdown_path: "docs/01-physical-ai-intro.md"
+                summary:
+                  takeaways:
+                    - "Physical AI combines artificial intelligence with physical embodiment in robots and autonomous systems."
+                    - "Embodiment is crucial for AI to interact with the real world through sensors and actuators."
+                    - "Applications range from industrial robots to autonomous vehicles and humanoid assistants."
+                  model_used: "claude-3-haiku-20240307"
+                  generated_at: "2025-12-10T11:00:30Z"
+                quiz:
+                  total_questions: 6
+                  questions:
+                    - id: "345e6789-e89b-12d3-a456-426614174002"
+                      question_number: 1
+                      question_text: "What is the key difference between traditional AI and Physical AI?"
+                      options:
+                        - "Physical AI is faster than traditional AI"
+                        - "Physical AI has embodiment in the physical world"
+                        - "Physical AI uses more advanced algorithms"
+                        - "Physical AI requires less data"
+                      correct_index: 1
+                      difficulty: "easy"
+                      topic: "Physical AI Definition"
+                learning_boosters:
+                  - type: "analogy"
+                    content: "Think of Physical AI like a brain in a body. Just as your brain needs your body's senses (eyes, ears, touch) to understand the world, AI needs sensors and actuators (the robot's 'body') to interact with reality."
+                    section_ref: "What is Physical AI"
+                    position: 1
+                  - type: "example"
+                    content: "Industrial robot arms in car factories are early examples of Physical AI. They use sensors to detect part positions and actuators to assemble components with precision."
+                    section_ref: "Applications"
+                    position: 2
+                  - type: "explanation"
+                    content: "Embodiment means the AI exists in a physical form (robot, drone, vehicle) that can sense and act in the real world, not just process data in software."
+                    section_ref: "Embodied Intelligence"
+                    position: 3
+                created_at: "2025-12-10T11:00:00Z"
+                updated_at: "2025-12-10T11:00:45Z"
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /content/health:
+    get:
+      tags:
+        - Status
+      summary: Health check endpoint
+      description: Health check for content generation service
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+              example:
+                status: "healthy"
+                timestamp: "2025-12-10T12:00:00Z"
+                services:
+                  database: "connected"
+                  llm_api: "available"
+                version: "1.0.0"
+
+components:
+  schemas:
+    GenerationRequest:
+      type: object
+      required:
+        - chapters_count
+        - model
+      properties:
+        chapters_count:
+          type: integer
+          minimum: 6
+          maximum: 8
+          description: Number of chapters to generate (6 for MVP, 8 for extended)
+        model:
+          type: string
+          description: LLM model identifier
+          enum:
+            - claude-3-5-sonnet-20241022
+            - claude-3-haiku-20240307
+        include_optional_chapters:
+          type: boolean
+          default: false
+          description: Include chapters 7-8 (safety/ethics, future trends)
+
+    GenerationJobResponse:
+      type: object
+      properties:
+        job_id:
+          type: string
+          format: uuid
+          description: Unique job identifier
+        status:
+          type: string
+          enum: [pending, in_progress, completed, failed]
+          description: Current job status
+        chapters_total:
+          type: integer
+          description: Total chapters to generate
+        started_at:
+          type: string
+          format: date-time
+          description: Job start timestamp (ISO 8601)
+        message:
+          type: string
+          description: Human-readable status message
+
+    RegenerationRequest:
+      type: object
+      properties:
+        model:
+          type: string
+          description: LLM model to use for regeneration
+          enum:
+            - claude-3-5-sonnet-20241022
+            - claude-3-haiku-20240307
+        regenerate_summary:
+          type: boolean
+          default: true
+          description: Regenerate chapter summary
+        regenerate_quiz:
+          type: boolean
+          default: true
+          description: Regenerate quiz questions
+        regenerate_boosters:
+          type: boolean
+          default: true
+          description: Regenerate learning boosters
+
+    ChapterRegenerationResponse:
+      type: object
+      properties:
+        chapter_id:
+          type: string
+          format: uuid
+          description: Chapter identifier
+        chapter_number:
+          type: integer
+          description: Chapter number
+        status:
+          type: string
+          enum: [pending, in_progress, completed, failed]
+          description: Regeneration status
+        message:
+          type: string
+          description: Status message
+
+    GenerationJobStatus:
+      type: object
+      properties:
+        job_id:
+          type: string
+          format: uuid
+          description: Job identifier
+        status:
+          type: string
+          enum: [pending, in_progress, completed, failed]
+          description: Current job status
+        chapters_completed:
+          type: integer
+          description: Number of chapters completed
+        chapters_total:
+          type: integer
+          description: Total chapters to generate
+        token_usage:
+          type: integer
+          description: Total tokens consumed by LLM API
+        started_at:
+          type: string
+          format: date-time
+          description: Job start timestamp (ISO 8601)
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Job completion timestamp (ISO 8601), null if in progress
+        errors:
+          type: array
+          items:
+            type: string
+          description: Array of error messages
+        progress_percentage:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Job completion percentage
+        estimated_completion:
+          type: string
+          format: date-time
+          nullable: true
+          description: Estimated completion time (ISO 8601), null if completed
+
+    ChapterListResponse:
+      type: object
+      properties:
+        chapters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChapterSummary'
+        total_count:
+          type: integer
+          description: Total number of chapters
+
+    ChapterSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        chapter_number:
+          type: integer
+          minimum: 1
+          maximum: 8
+        title:
+          type: string
+        slug:
+          type: string
+        word_count:
+          type: integer
+        reading_time_minutes:
+          type: integer
+        status:
+          type: string
+          enum: [pending, generated, validated, published, failed]
+        docusaurus_url:
+          type: string
+        has_summary:
+          type: boolean
+        quiz_question_count:
+          type: integer
+        learning_booster_count:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+
+    ChapterDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        chapter_number:
+          type: integer
+        title:
+          type: string
+        slug:
+          type: string
+        word_count:
+          type: integer
+        reading_time_minutes:
+          type: integer
+        status:
+          type: string
+          enum: [pending, generated, validated, published, failed]
+        docusaurus_url:
+          type: string
+        markdown_path:
+          type: string
+        summary:
+          $ref: '#/components/schemas/Summary'
+        quiz:
+          $ref: '#/components/schemas/Quiz'
+        learning_boosters:
+          type: array
+          items:
+            $ref: '#/components/schemas/LearningBooster'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Summary:
+      type: object
+      properties:
+        takeaways:
+          type: array
+          items:
+            type: string
+          minItems: 3
+          maxItems: 5
+          description: 3-5 key summary points
+        model_used:
+          type: string
+          description: LLM model used for generation
+        generated_at:
+          type: string
+          format: date-time
+
+    Quiz:
+      type: object
+      properties:
+        total_questions:
+          type: integer
+          minimum: 5
+          maximum: 7
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuizQuestion'
+
+    QuizQuestion:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        question_number:
+          type: integer
+        question_text:
+          type: string
+        options:
+          type: array
+          items:
+            type: string
+          minItems: 4
+          maxItems: 4
+          description: Exactly 4 answer options
+        correct_index:
+          type: integer
+          minimum: 0
+          maximum: 3
+          description: Index of correct answer (0-3)
+        difficulty:
+          type: string
+          enum: [easy, medium, hard]
+        topic:
+          type: string
+
+    LearningBooster:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [analogy, example, explanation]
+          description: Type of learning booster
+        content:
+          type: string
+          description: Booster content (100-300 chars)
+        section_ref:
+          type: string
+          description: Related section heading
+        position:
+          type: integer
+          minimum: 1
+          maximum: 3
+          description: Position within chapter
+
+    HealthCheckResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, degraded, unhealthy]
+        timestamp:
+          type: string
+          format: date-time
+        services:
+          type: object
+          properties:
+            database:
+              type: string
+              enum: [connected, disconnected]
+            llm_api:
+              type: string
+              enum: [available, unavailable]
+        version:
+          type: string
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error type
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: object
+          description: Additional error details
+        timestamp:
+          type: string
+          format: date-time
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "validation_error"
+            message: "Invalid chapters_count: must be between 6 and 8"
+            details:
+              field: "chapters_count"
+              value: 10
+            timestamp: "2025-12-10T12:00:00Z"
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "not_found"
+            message: "Generation job not found"
+            details:
+              job_id: "550e8400-e29b-41d4-a716-446655440000"
+            timestamp: "2025-12-10T12:00:00Z"
+
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "rate_limit_exceeded"
+            message: "Too many generation requests. Please try again in 60 seconds."
+            details:
+              retry_after: 60
+            timestamp: "2025-12-10T12:00:00Z"
+
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "internal_server_error"
+            message: "An unexpected error occurred. Please try again later."
+            details: {}
+            timestamp: "2025-12-10T12:00:00Z"

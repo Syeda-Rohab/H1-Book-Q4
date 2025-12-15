@@ -1,0 +1,12 @@
+# Core dependencies for textbook generation
+anthropic>=0.39.0
+markdown-it-py>=3.0.0
+sqlalchemy>=2.0.0
+asyncpg>=0.29.0
+fastapi>=0.115.0
+pydantic>=2.0.0
+alembic>=1.13.0
+
+# Optional for development
+pytest>=8.0.0
+black>=24.0.0
