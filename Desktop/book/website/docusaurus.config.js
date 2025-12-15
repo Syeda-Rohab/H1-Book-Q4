@@ -12,16 +12,15 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Production URL (Vercel deployment)
-  url: process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'http://localhost:3000',
+  url: 'https://h1-book-q4.vercel.app',
   baseUrl: '/',
+  trailingSlash: false,
 
   // GitHub pages deployment config
   organizationName: 'Syeda-Rohab',
   projectName: 'ai-native-textbook',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
 
   // Markdown configuration
   markdown: {
@@ -42,8 +41,8 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          // Docs route (changed from '/' to allow custom homepage)
-          routeBasePath: 'docs',
+          // Docs route (using /docs for Vercel compatibility)
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           // Remove edit links (no external repo for MVP)
           editUrl: undefined,

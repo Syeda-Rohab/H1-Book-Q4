@@ -91,12 +91,12 @@ function HomepageHeader() {
           <div className={styles.buttons}>
             <Link
               className={clsx('button button--primary button--lg', styles.buttonPrimary)}
-              to="/intro">
+              to="/docs/intro">
               Start Learning
             </Link>
             <Link
               className={clsx('button button--secondary button--lg', styles.buttonSecondary)}
-              to="/chapter-01-physical-ai-intro">
+              to="/docs/chapter-01-physical-ai-intro">
               Read Chapter 1
             </Link>
           </div>
@@ -126,37 +126,37 @@ function ChapterOverview() {
       number: '01',
       title: 'Introduction to Physical AI',
       description: 'Foundations of embodied intelligence and real-world AI systems',
-      link: '/chapter-01-physical-ai-intro',
+      link: '/docs/chapter-01-physical-ai-intro',
     },
     {
       number: '02',
       title: 'Humanoid Robotics Fundamentals',
       description: 'Robot anatomy, degrees of freedom, and balance control',
-      link: '/chapter-02-humanoid-robotics-fundamentals',
+      link: '/docs/chapter-02-humanoid-robotics-fundamentals',
     },
     {
       number: '03',
       title: 'Sensors and Perception',
       description: 'Vision systems, tactile sensors, IMUs, and sensor fusion',
-      link: '/chapter-03-sensors-perception',
+      link: '/docs/chapter-03-sensors-perception',
     },
     {
       number: '04',
       title: 'Actuators and Motion',
       description: 'Motors, hydraulics, and bipedal locomotion systems',
-      link: '/chapter-04-actuators-motion',
+      link: '/docs/chapter-04-actuators-motion',
     },
     {
       number: '05',
       title: 'AI for Robot Control',
       description: 'Reinforcement learning, imitation learning, and sim-to-real transfer',
-      link: '/chapter-05-ai-robot-control',
+      link: '/docs/chapter-05-ai-robot-control',
     },
     {
       number: '06',
       title: 'Manipulation and Dexterity',
       description: 'Grasp planning, object manipulation, and dexterous hands',
-      link: '/chapter-06-manipulation-dexterity',
+      link: '/docs/chapter-06-manipulation-dexterity',
     },
   ];
 
@@ -209,7 +209,7 @@ export default function Home(): JSX.Element {
             <p>Dive into the world of Physical AI and Humanoid Robotics today.</p>
             <Link
               className={clsx('button button--primary button--lg', styles.ctaButton)}
-              to="/intro">
+              to="/docs/intro">
               Start Reading Now
             </Link>
           </div>
