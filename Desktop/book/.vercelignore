@@ -1,0 +1,11 @@
+node_modules
+.git
+.cache
+.docusaurus
+website/node_modules
+website/.docusaurus
+website/.cache
+website/build
+*.log
+.env
+.env.local
