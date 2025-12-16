@@ -1,0 +1,10 @@
+{
+  "name": "ai-native-textbook",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd website && npm start",
+    "build": "cd website && npm install && npm run build",
+    "serve": "cd website && npm run serve"
+  }
+}
