@@ -3,5 +3,12 @@
   "buildCommand": "cd website && npm install && npm run build",
   "outputDirectory": "website/build",
   "framework": null,
-  "devCommand": "cd website && npm start"
+  "devCommand": "cd website && npm start",
+  "routes": [
+    {
+      "src": "/[^.]+",
+      "dest": "/",
+      "status": 200
+    }
+  ]
 }
