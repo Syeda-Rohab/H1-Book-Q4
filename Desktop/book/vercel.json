@@ -1,8 +1,17 @@
 {
-  "buildCommand": "cd website && npm install && npm run build",
+  "buildCommand": "cd website && npm ci && npm run build",
   "outputDirectory": "website/build",
-  "installCommand": null,
-  "framework": null,
+  "installCommand": "npm --version",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "routes": [
+    {
+      "src": "/docs/(.*)",
+      "dest": "/docs/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
 }
