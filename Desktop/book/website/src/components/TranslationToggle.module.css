@@ -8,6 +8,52 @@
   z-index: 999;
 }
 
+.localhostMessage {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  min-width: 280px;
+  animation: slideUp 0.3s ease-out;
+}
+
+.localhostMessage p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.localhostMessage p:first-child {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.localhostMessage a {
+  color: white;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.localhostMessage a:hover {
+  opacity: 0.9;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .urduButton {
   display: flex;
   align-items: center;

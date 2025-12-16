@@ -25,10 +25,23 @@ export default function TranslationToggle({
   languages = DEFAULT_LANGUAGES,
 }: TranslationToggleProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleTranslate = (langCode: string) => {
+    if (typeof window === 'undefined') return;
+
     const currentUrl = window.location.href;
-    // Use Google Translate for reliable translation
+    const isLocalhost = currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1');
+
+    if (isLocalhost) {
+      // Show message for localhost
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 5000);
+      setIsOpen(false);
+      return;
+    }
+
+    // Use Google Translate for production URLs
     const translateUrl = `https://translate.google.com/translate?sl=auto&tl=${langCode}&u=${encodeURIComponent(currentUrl)}`;
     window.open(translateUrl, '_blank');
     setIsOpen(false);
@@ -40,6 +53,14 @@ export default function TranslationToggle({
 
   return (
     <div className={styles.container}>
+      {/* Localhost Message */}
+      {showMessage && (
+        <div className={styles.localhostMessage}>
+          <p>⚠️ Translation works on deployed site only</p>
+          <p>Visit: <a href="https://h1-book-q4.vercel.app" target="_blank" rel="noopener noreferrer">h1-book-q4.vercel.app</a></p>
+        </div>
+      )}
+
       {/* Quick Urdu Translation Button */}
       <button
         className={styles.urduButton}
