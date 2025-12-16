@@ -4,11 +4,11 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e40af 0%, #0c4a6e 100%);
 }
 
 [data-theme='dark'] .heroBanner {
-  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
 }
 
 .heroContent {
@@ -63,7 +63,7 @@
 
 .buttonPrimary {
   background: white !important;
-  color: #667eea !important;
+  color: #1e40af !important;
   border: none;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -72,7 +72,7 @@
 .buttonPrimary:hover {
   transform: translateY(-2px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  color: #667eea !important;
+  color: #1e40af !important;
 }
 
 .buttonSecondary {
@@ -84,7 +84,7 @@
 
 .buttonSecondary:hover {
   background: white !important;
-  color: #667eea !important;
+  color: #1e40af !important;
   transform: translateY(-2px);
 }
 
@@ -199,7 +199,7 @@
   left: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(180deg, #1e40af 0%, #0c4a6e 100%);
   transform: scaleY(0);
   transition: transform 0.3s ease;
 }
@@ -251,7 +251,7 @@
 .cta {
   padding: 5rem 0;
   text-align: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e40af 0%, #0c4a6e 100%);
   color: white;
 }
 
@@ -275,7 +275,7 @@
 
 .ctaButton {
   background: white !important;
-  color: #667eea !important;
+  color: #1e40af !important;
   border: none;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -284,7 +284,7 @@
 .ctaButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  color: #667eea !important;
+  color: #1e40af !important;
 }
 
 /* Responsive Design */

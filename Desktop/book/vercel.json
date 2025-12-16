@@ -1,6 +1,4 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "website/build",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install && cd website && npm install"
+  "buildCommand": "cd website && npm install && npm run build",
+  "outputDirectory": "website/build"
 }
