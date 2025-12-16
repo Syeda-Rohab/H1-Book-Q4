@@ -4,11 +4,6 @@
   "outputDirectory": "website/build",
   "framework": null,
   "devCommand": "cd website && npm start",
-  "routes": [
-    {
-      "src": "/[^.]+",
-      "dest": "/",
-      "status": 200
-    }
-  ]
+  "trailingSlash": false,
+  "cleanUrls": true
 }

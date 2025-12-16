@@ -34,10 +34,14 @@ export default function TranslationToggle({
     const isLocalhost = currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1');
 
     if (isLocalhost) {
-      // Show message for localhost
+      // For localhost, show message about Vercel deployment
       setShowMessage(true);
       setTimeout(() => setShowMessage(false), 5000);
       setIsOpen(false);
+      // Still open translation for Vercel URL
+      const vercelUrl = 'https://h1-book-q4.vercel.app' + window.location.pathname;
+      const translateUrl = `https://translate.google.com/translate?sl=auto&tl=${langCode}&u=${encodeURIComponent(vercelUrl)}`;
+      window.open(translateUrl, '_blank');
       return;
     }
 
@@ -56,8 +60,8 @@ export default function TranslationToggle({
       {/* Localhost Message */}
       {showMessage && (
         <div className={styles.localhostMessage}>
-          <p>⚠️ Translation works on deployed site only</p>
-          <p>Visit: <a href="https://h1-book-q4.vercel.app" target="_blank" rel="noopener noreferrer">h1-book-q4.vercel.app</a></p>
+          <p>✅ Opening translated page from Vercel deployment...</p>
+          <p><small>Localhost pages cannot be translated directly</small></p>
         </div>
       )}
 
