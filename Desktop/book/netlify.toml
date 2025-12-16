@@ -1,7 +1,7 @@
 [build]
   base = "website"
   command = "npm install && npm run build"
-  publish = "build"
+  publish = "website/build"
 
 [[redirects]]
   from = "/*"
