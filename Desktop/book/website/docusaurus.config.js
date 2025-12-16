@@ -32,7 +32,19 @@ const config = {
   // Internationalization (i18n) config
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'ur'],
+    localeConfigs: {
+      en: {
+        label: 'English',
+        direction: 'ltr',
+        htmlLang: 'en-US',
+      },
+      ur: {
+        label: 'اردو',
+        direction: 'rtl',
+        htmlLang: 'ur-PK',
+      },
+    },
   },
 
   presets: [
@@ -114,6 +126,26 @@ const config = {
             sidebarId: 'textbookSidebar',
             position: 'left',
             label: 'Chapters',
+          },
+          {
+            to: '/chat',
+            label: '🤖 AI Chat',
+            position: 'left',
+          },
+          {
+            to: '/dashboard',
+            label: '📊 Dashboard',
+            position: 'left',
+          },
+          {
+            to: '/videos',
+            label: '🎥 Videos',
+            position: 'left',
+          },
+          {
+            to: '/simulations',
+            label: '🎮 Simulations',
+            position: 'left',
           },
           {
             href: 'https://github.com/Syeda-Rohab/H1-Book-Q4',
@@ -220,7 +252,7 @@ const config = {
     // Textbook metadata
     textbook: {
       topic: 'Physical AI & Humanoid Robotics',
-      chaptersTotal: 6, // MVP: 6 chapters (extendable to 8)
+      chaptersTotal: 8, // Complete: 8 chapters including Safety/Ethics and Future Trends
       wordsPerChapter: '800-1200',
       readingTimePerChapter: '5-7 minutes',
     },

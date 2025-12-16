@@ -17,6 +17,8 @@ const sidebars = {
         'chapter-04-actuators-motion',
         'chapter-05-ai-robot-control',
         'chapter-06-manipulation-dexterity',
+        'chapter-07-safety-ethics',
+        'chapter-08-future-trends',
       ]
     },
   ],
