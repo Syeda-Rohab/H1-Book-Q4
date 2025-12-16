@@ -1,8 +1,6 @@
 /**
  * Translation Toggle Component
- *
- * Provides one-click translation to Urdu and other languages
- * using browser-based translation or Google Translate
+ * Simple and reliable translation using Google Translate
  */
 
 import React, { useState } from 'react';
@@ -25,29 +23,25 @@ export default function TranslationToggle({
   languages = DEFAULT_LANGUAGES,
 }: TranslationToggleProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
 
   const handleTranslate = (langCode: string) => {
     if (typeof window === 'undefined') return;
 
-    const currentUrl = window.location.href;
-    const isLocalhost = currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1');
+    // Get the page URL - use Vercel URL for production-like behavior
+    const isLocalhost = window.location.hostname === 'localhost' ||
+                       window.location.hostname === '127.0.0.1';
 
+    let pageUrl = window.location.href;
+
+    // If on localhost, use Vercel URL instead (Google Translate requires public URL)
     if (isLocalhost) {
-      // For localhost, show message about Vercel deployment
-      setShowMessage(true);
-      setTimeout(() => setShowMessage(false), 5000);
-      setIsOpen(false);
-      // Still open translation for Vercel URL
-      const vercelUrl = 'https://h1-book-q4.vercel.app' + window.location.pathname;
-      const translateUrl = `https://translate.google.com/translate?sl=auto&tl=${langCode}&u=${encodeURIComponent(vercelUrl)}`;
-      window.open(translateUrl, '_blank');
-      return;
+      pageUrl = 'https://h1-book-q4.vercel.app' + window.location.pathname;
     }
 
-    // Use Google Translate for production URLs
-    const translateUrl = `https://translate.google.com/translate?sl=auto&tl=${langCode}&u=${encodeURIComponent(currentUrl)}`;
-    window.open(translateUrl, '_blank');
+    // Open Google Translate with the page
+    const translateUrl = `https://translate.google.com/translate?sl=en&tl=${langCode}&u=${encodeURIComponent(pageUrl)}`;
+    window.open(translateUrl, '_blank', 'noopener,noreferrer');
+
     setIsOpen(false);
   };
 
@@ -57,22 +51,15 @@ export default function TranslationToggle({
 
   return (
     <div className={styles.container}>
-      {/* Localhost Message */}
-      {showMessage && (
-        <div className={styles.localhostMessage}>
-          <p>✅ Opening translated page from Vercel deployment...</p>
-          <p><small>Localhost pages cannot be translated directly</small></p>
-        </div>
-      )}
-
       {/* Quick Urdu Translation Button */}
       <button
         className={styles.urduButton}
         onClick={handleUrduTranslate}
         aria-label="Translate to Urdu"
+        title="Translate this page to Urdu"
       >
         <span className={styles.icon}>🌐</span>
-        <span className={styles.label}>اردو Translate</span>
+        <span className={styles.label}>اردو</span>
       </button>
 
       {/* More Languages Dropdown */}
@@ -82,6 +69,7 @@ export default function TranslationToggle({
           onClick={() => setIsOpen(!isOpen)}
           aria-label="More languages"
           aria-expanded={isOpen}
+          title="Choose another language"
         >
           <span className={styles.dropdownIcon}>▼</span>
         </button>
@@ -96,6 +84,7 @@ export default function TranslationToggle({
                 key={lang.code}
                 className={styles.languageOption}
                 onClick={() => handleTranslate(lang.code)}
+                title={`Translate to ${lang.name}`}
               >
                 <span className={styles.langName}>{lang.name}</span>
                 <span className={styles.langNative}>{lang.nativeName}</span>
