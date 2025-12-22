@@ -1,0 +1,145 @@
+.navIcons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.iconWrapper {
+  position: relative;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.iconButton:hover {
+  background: var(--ifm-color-emphasis-200);
+  transform: scale(1.1);
+}
+
+.iconButton:active {
+  transform: scale(0.95);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 280px;
+  max-width: 320px;
+  z-index: 1000;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdownHeader {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ifm-color-primary);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 8px 8px 0 0;
+}
+
+.dropdownContent {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+}
+
+.dropdownItem {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition: all 0.15s ease;
+  font-size: 0.9rem;
+  border-left: 3px solid transparent;
+}
+
+.dropdownItem:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-left-color: var(--ifm-color-primary);
+  padding-left: 1.25rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 996px) {
+  .navIcons {
+    gap: 0.25rem;
+    margin-left: 0.5rem;
+  }
+
+  .iconButton {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  .dropdown {
+    right: 0;
+    left: auto;
+    min-width: 240px;
+    max-width: calc(100vw - 40px);
+  }
+
+  .dropdownItem {
+    font-size: 0.85rem;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .dropdownHeader {
+    font-size: 0.85rem;
+    padding: 0.65rem 0.85rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .navIcons {
+    gap: 0.15rem;
+  }
+
+  .iconButton {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+
+  .dropdown {
+    position: fixed;
+    top: var(--ifm-navbar-height);
+    right: 10px;
+    left: 10px;
+    margin-top: 0.5rem;
+    min-width: auto;
+    max-width: none;
+  }
+}

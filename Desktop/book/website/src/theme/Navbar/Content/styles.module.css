@@ -1,0 +1,24 @@
+.navbarWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+/* Ensure proper spacing */
+.navbarWrapper > :first-child {
+  flex: 1;
+}
+
+/* Mobile optimization */
+@media (max-width: 996px) {
+  .navbarWrapper {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbarWrapper {
+    gap: 0.25rem;
+  }
+}

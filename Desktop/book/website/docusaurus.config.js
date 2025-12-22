@@ -110,30 +110,29 @@ const config = {
             position: 'left',
           },
           {
-            type: 'docSidebar',
-            sidebarId: 'textbookSidebar',
-            position: 'left',
-            label: 'Chapters',
-          },
-          {
             to: '/chat',
             label: '🤖 AI Chat',
             position: 'left',
           },
           {
-            to: '/dashboard',
-            label: '📊 Dashboard',
+            type: 'dropdown',
+            label: '📚 Pages',
             position: 'left',
-          },
-          {
-            to: '/videos',
-            label: '🎥 Videos',
-            position: 'left',
-          },
-          {
-            to: '/simulations',
-            label: '🎮 Simulations',
-            position: 'left',
+            items: [
+              {
+                type: 'docSidebar',
+                sidebarId: 'textbookSidebar',
+                label: '📖 Chapters',
+              },
+              {
+                to: '/dashboard',
+                label: '📊 Dashboard',
+              },
+              {
+                to: '/simulations',
+                label: '🎮 Simulations',
+              },
+            ],
           },
           {
             href: 'https://github.com/Syeda-Rohab/H1-Book-Q4',
