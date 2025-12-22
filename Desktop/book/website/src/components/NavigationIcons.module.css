@@ -95,7 +95,7 @@
 @media (max-width: 996px) {
   .navIcons {
     gap: 0.25rem;
-    margin-left: 0.5rem;
+    margin-left: 0;
   }
 
   .iconButton {
@@ -125,12 +125,13 @@
 @media (max-width: 600px) {
   .navIcons {
     gap: 0.15rem;
+    margin-left: 0;
   }
 
   .iconButton {
-    width: 32px;
-    height: 32px;
-    font-size: 1.1rem;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
   }
 
   .dropdown {
