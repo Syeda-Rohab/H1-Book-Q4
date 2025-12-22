@@ -44,6 +44,16 @@ export default function NavigationIcons(): JSX.Element {
 
   return (
     <div className={styles.navIcons}>
+      {/* AI Chat Icon */}
+      <Link
+        to="/chat"
+        className={styles.iconButton}
+        aria-label="AI Chat Assistant"
+        title="AI Chat"
+      >
+        <span role="img" aria-label="robot">🤖</span>
+      </Link>
+
       {/* Chapters Icon with Dropdown */}
       <div className={styles.iconWrapper} ref={dropdownRef}>
         <button
